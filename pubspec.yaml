@@ -1,5 +1,5 @@
 name: stock_register
-description: Stock Register (Flutter port of the HTML app)
+description: Stock Register
 publish_to: 'none'
 version: 1.0.0+1
 
