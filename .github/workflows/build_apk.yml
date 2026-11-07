@@ -23,18 +23,13 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: Auto-generate Android files
-        run: |
-          if [ ! -d "android" ]; then
-            flutter create temp_app --org com.shakil.stock --project-name stock_register
-            cp -r temp_app/android .
-            rm -rf temp_app
-          fi
+      - name: Create Android Platform
+        run: flutter create . --platforms=android --org=com.shakil.stock
 
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Build Release APK
+      - name: Build APK
         run: flutter build apk --release
 
       - name: Upload APK
