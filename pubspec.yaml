@@ -1,34 +1,20 @@
-name: Build Flutter APK
+name: stock_register
+description: Stock Register (Flutter port of the HTML app)
+publish_to: 'none'
+version: 1.0.0+1
 
-on:
-  push:
-    branches: [ main, master ]
-  workflow_dispatch:
+environment:
+  sdk: ">=3.3.0 <4.0.0"
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+dependencies:
+  flutter:
+    sdk: flutter
+  shared_preferences: ^2.3.3
+  path_provider: ^2.1.5
+  printing: ^5.13.4
+  pdf: ^3.11.1
+  share_plus: ^10.1.4
+  file_picker: ^8.1.6
 
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          cache: true
-
-      - name: Create Android Platform
-        run: |
-          flutter create . --platforms=android --org=com.shakil.stock
-          sed -i 's/minSdkVersion = .*/minSdkVersion = 21/' android/app/build.gradle || true
-          sed -i 's/minSdkVersion [0-9]*/minSdkVersion 21/' android/app/build.gradle || true
-
-      - name: Add Internet Permission
-        run: |
-          sed -i '/<manifest/
+flutter:
+  uses-material-design: true
